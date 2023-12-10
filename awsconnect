@@ -1,0 +1,24 @@
+import boto3
+
+# Replace these with your actual AWS credentials
+aws_access_key = 'your_access_key'
+aws_secret_key = 'your_secret_key'
+aws_region = 'your_region'
+
+# Create a session using your AWS credentials
+session = boto3.Session(
+    aws_access_key_id=aws_access_key,
+    aws_secret_access_key=aws_secret_key,
+    region_name=aws_region
+)
+
+# Create a client for a specific AWS service (e.g., S3)
+s3_client = session.client('s3')
+
+# Now you can use the 's3_client' object to interact with the S3 service
+# For example, list all S3 buckets
+response = s3_client.list_buckets()
+
+print("S3 Buckets:")
+for bucket in response['Buckets']:
+    print(f"- {bucket['Name']}")
